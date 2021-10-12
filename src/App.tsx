@@ -30,7 +30,7 @@ function App() {
       <MouseContainer
         styles={styles.mouseContainer}
         chasingElement={
-          <ChasingElement chasingComponent={<div>lala</div>} />
+          <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
         }
       />
     </div>
