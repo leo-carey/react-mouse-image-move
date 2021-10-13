@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 export interface IChasingElement {
-    chasingComponent?: any,//React.FC,
+    chasingComponent?: ReactElement,
     styles?: object
 }
 
