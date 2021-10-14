@@ -1,13 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react'
-import IElementProperties from '../../interfaces/IElementProperties'
+import { ChasingElement } from '..'
+import IElementChildProperties from '../../interfaces/IElementChildProperties'
 import IMouseContainer from '../../interfaces/IMouseContainer'
 
 const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, options}) => {
-    const currentElement = useRef(null)
-    const [style, setStyle] = useState(styles)
+    const wrapperElement = useRef(null)
+
+    const initElementChildProperties: IElementChildProperties = {
+        width: 0,
+        height: 0,
+        left: 0,
+        top: 0,
+        transitionTimeout: null,
+        updateCall: 0
+    }
+
+    const [style, setStyle] = useState(chasingElement.props.styles)
+    const [elementChildProperties, setElementChildProperties] = useState(initElementChildProperties)
     
     const defaultSettings = {
-        reverse: false,
         max: 35,
         perspective: 1000,
         easing: 'cubic-bezier(.03,.98,.52,.99)',
@@ -23,43 +34,36 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
         ...options,
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const elementProperties: IElementProperties = {
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0,
-        transitionTimeout: null,
-        updateCall: 0,
-        reverse: settings.reverse ? -1 : 1
-    }
-
     useEffect(() => {}, [])
     
     useEffect(() => {
         return () => {
-            elementProperties.transitionTimeout && clearTimeout(elementProperties.transitionTimeout)
-            cancelAnimationFrame(elementProperties.updateCall)
+            elementChildProperties.transitionTimeout && clearTimeout(elementChildProperties.transitionTimeout)
+            cancelAnimationFrame(elementChildProperties.updateCall)
         }
-    }, [elementProperties])
+    }, [elementChildProperties])
 
-    const updateElementPosition = (element: any) => {
+    const updateChildPosition = (element: any) => {
         const rect = element.currentTarget.getBoundingClientRect()
-        elementProperties.width = element.currentTarget.offsetWidth
-        elementProperties.height = element.currentTarget.offsetHeight
-        elementProperties.left = rect.left
-        elementProperties.top = rect.top
+
+        setElementChildProperties({
+            ...elementChildProperties,
+            width: element.currentTarget.offsetWidth,
+            height: element.currentTarget.offsetHeight,
+            left: rect.left,
+            top: rect.top
+        })
     }
 
     const setTransition = () => {
-        elementProperties.transitionTimeout && clearTimeout(elementProperties.transitionTimeout)
+        elementChildProperties.transitionTimeout && clearTimeout(elementChildProperties.transitionTimeout)
 
         setStyle({
             ...style,
             transition: `${settings.speed}ms ${settings.easing}`
         })
 
-        elementProperties.transitionTimeout = setTimeout(() => {
+        elementChildProperties.transitionTimeout = setTimeout(() => {
             setStyle({
                 ...style,
                 transition: ''
@@ -68,12 +72,12 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
     }
 
     const getValues = (e: any) => {
-        const x = (e.nativeEvent.clientX - elementProperties.left) / elementProperties.width
-        const y = (e.nativeEvent.clientY - elementProperties.top) / elementProperties.height
+        const x = (e.nativeEvent.clientX - elementChildProperties.left) / elementChildProperties.width
+        const y = (e.nativeEvent.clientY - elementChildProperties.top) / elementChildProperties.height
         const _x = Math.min(Math.max(x, 0), 1)
         const _y = Math.min(Math.max(y, 0), 1)
-        const tiltX = (elementProperties.reverse * (settings.max / 2 - _x * settings.max)).toFixed(2)
-        const tiltY = (elementProperties.reverse * (_y * settings.max -   settings.max / 2)).toFixed(2)
+        const tiltX = (settings.max / 2 - _x * settings.max).toFixed(2)
+        const tiltY = (_y * settings.max -   settings.max / 2).toFixed(2)
         const percentageX = _x * 100
         const percentageY = _y * 100
 
@@ -86,38 +90,47 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
     }
 
     const update = (e: any) => {
-        const values = getValues(e)
+        let values = getValues(e)
 
         setStyle({
             ...style,
-            transform: `perspective(${settings.perspective}px) rotateX(${settings.axis === 'x' ? 0 : values.tiltY}deg) rotateY(${settings.axis === 'y' ? 0 : values.tiltX}deg) scale3d(${settings.scale}, ${settings.scale}, ${settings.scale})`
+            transform: `
+                perspective(${settings.perspective}px)
+                rotateX(${settings.axis === 'x' ? 0 : values.tiltY}deg)
+                rotateY(${settings.axis === 'y' ? 0 : values.tiltX}deg)
+                scale3d(${settings.scale}, ${settings.scale}, ${settings.scale})`
         })
 
-        elementProperties.updateCall = null
+        elementChildProperties.updateCall = null
     }
 
     const reset = () => {
         window.requestAnimationFrame(() => {
             setStyle({
                 ...style,
-                transform: `perspective(${settings.perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`
+                transform: `
+                    perspective(${settings.perspective}px)
+                    rotateX(0deg)
+                    rotateY(0deg)
+                    scale3d(1, 1, 1)
+                `
             })
         })
     }
 
     const handleMouseEnter = (e: any) => {
-        updateElementPosition(e)
+        updateChildPosition(e)
         setTransition()
     }
 
     const handleMouseMove = (e: any) => {
         e.persist()
 
-        if(elementProperties.updateCall !== null) {
-            window.cancelAnimationFrame(elementProperties.updateCall)
+        if(elementChildProperties.updateCall !== null) {
+            cancelAnimationFrame(elementChildProperties.updateCall)
         }
 
-        elementProperties.updateCall = requestAnimationFrame(update.bind(currentElement, e))
+        elementChildProperties.updateCall = requestAnimationFrame(update.bind(wrapperElement, e))
     }
 
     const handleMouseLeave = (e: any) => {
@@ -130,13 +143,15 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
 
     return (
         <div
-            ref={currentElement}
-            style={style}
+            ref={wrapperElement}
+            style={styles}
             onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            { chasingElement }
+            <ChasingElement styles={style}>
+                {chasingElement.props.chasingComponent}
+            </ChasingElement>
         </div>
     )
 }

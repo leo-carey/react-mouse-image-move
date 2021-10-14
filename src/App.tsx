@@ -16,7 +16,7 @@ const styles = {
   chasingElement: {
     backgroundColor: '#7771c7',
     width: 400,
-    height: 400
+    height: 300
   }
 }
 
