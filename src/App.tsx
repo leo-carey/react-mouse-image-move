@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 
-import { MouseContainer, ChasingElement } from './components'
+import { MouseContainer, ChasingElement } from './App/components'
 
 const styles = {
   mouseContainer: {
@@ -28,10 +28,15 @@ function App() {
       </header>
 
       <MouseContainer
-        styles={styles.mouseContainer}
-        chasingElement={
-          <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
-        }
+          options={{
+            max: 10,
+            perspective: 1000,
+            scale: 1.05,
+          }}
+          styles={styles.mouseContainer}
+          chasingElement={
+            <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
+          }
       />
     </div>
   );

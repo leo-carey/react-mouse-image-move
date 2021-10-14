@@ -1,9 +1,6 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
+import IChasingElement from '../../interfaces/IChasingElement'
 
-export interface IChasingElement {
-    chasingComponent?: ReactElement,
-    styles?: object
-}
 
 const ChasingElement: React.FC<IChasingElement> = ({chasingComponent, styles, children}) => {
     return (
