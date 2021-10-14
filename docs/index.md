@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## React Mouse Image Move
 
 You can use the [editor on GitHub](https://github.com/leoncarey/react-mouse-image-move/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
