@@ -1,7 +1,7 @@
 {
   "name": "react-mouse-image-move",
   "description": "A React component to move images also when mouse moves.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "files": [
     "dist",
@@ -14,7 +14,7 @@
   ],
   "author": "Leonardo Carey",
   "license": "ISC",
-  "homepage": "https://github.com/leoncarey/react-mouse-image-move",
+  "homepage": "https://leoncarey.github.io/react-mouse-image-move",
   "repository": {
     "type": "git",
     "url": "https://github.com/leoncarey/react-mouse-image-move"
