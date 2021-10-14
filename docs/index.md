@@ -12,12 +12,12 @@ yarn add react-mouse-image-move -D
 
 Basicly, import ```MouseContainer``` and ```ChasingElement``` to your application:
 
-```javascript
+```tsx
 import { MouseContainer, ChasingElement } from 'react-mouse-image-move'
 ```
 
 Create your styles:
-```javascript
+```tsx
 const styles = {
   mouseContainer: {
     backgroundColor: '#d3eeca',
@@ -38,7 +38,7 @@ const styles = {
 
 Call to your application:
 
-```javascript
+```tsx
 function App() {
   return (
     <div>
@@ -74,7 +74,7 @@ export default App
 | options        | Options to child effect               | no        |
 
 
-```javascript
+```tsx
 // Options
 {
     max: 10, // Element child rotation
