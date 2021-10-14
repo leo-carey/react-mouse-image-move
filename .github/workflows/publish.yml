@@ -22,6 +22,7 @@ jobs:
   publish-npm:
     name: Publishing to npm
     environment: production
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
