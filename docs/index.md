@@ -1,37 +1,99 @@
-## React Mouse Image Move
+## Getting started
 
-You can use the [editor on GitHub](https://github.com/leoncarey/react-mouse-image-move/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+npm i react-mouse-image-move -D
+```
+or
+```
+yarn add react-mouse-image-move -D
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## How to work
 
-### Jekyll Themes
+Basicly, import ```MouseContainer``` and ```ChasingElement``` to your application:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/leoncarey/react-mouse-image-move/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```javascript
+import { MouseContainer, ChasingElement } from 'react-mouse-image-move'
+```
 
-### Support or Contact
+Create your styles:
+```javascript
+const styles = {
+  mouseContainer: {
+    backgroundColor: '#d3eeca',
+    width: '100%',
+    height: '70vh',
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  chasingElement: {
+    backgroundColor: '#7771c7',
+    width: 400,
+    height: 300
+  }
+}
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Call to your application:
+
+```javascript
+function App() {
+  return (
+    <div>
+      <MouseContainer
+          options={{
+            max: 10,
+            perspective: 1000,
+            scale: 1.05,
+          }}
+          styles={styles.mouseContainer}
+          chasingElement={
+            <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
+          }
+      />
+    </div>
+  );
+}
+
+export default App
+```
+
+---
+## Elements
+
+<br>
+
+#### MouseContainer
+
+| Property       | Description                           | Required  |
+| -------------- | ------------------------------------- | --------- |
+| chasingElement | ```<ChasingElement />``` as children  | yes       |
+| styles         | Your styles                           | no        |
+| options        | Options to child effect               | no        |
+
+
+```javascript
+// Options
+{
+    max: 10, // Element child rotation
+    perspective: 1000, // Rotation depth
+    easing: 'cubic-bezier(.03,.98,.52,.99)', // Transition between values
+    scale: 1.05, // How much does the size increase
+    speed: 1000, // Speed for transition element
+    axis: null|'x'|'y', // "x" only move horizontaly, "y" only move verticaly, "null" both
+    reset: true|false // If reset element or keep last position value
+}
+```
+
+<br>
+
+---
+
+#### ChasingElement
+
+| Property         | Description                           | Required  |
+| ---------------- | ------------------------------------- | --------- |
+| chasingComponent | HTML element as children              | yes       |
+| styles           | Your styles                           | no        |

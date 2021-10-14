@@ -19,12 +19,11 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
     const [elementChildProperties, setElementChildProperties] = useState(initElementChildProperties)
     
     const defaultSettings = {
-        max: 35,
+        max: 30,
         perspective: 1000,
         easing: 'cubic-bezier(.03,.98,.52,.99)',
-        scale: '1.1',
+        scale: 1.1,
         speed: 1000,
-        transition: true,
         axis: null,
         reset: true
     }
@@ -56,19 +55,10 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
     }
 
     const setTransition = () => {
-        elementChildProperties.transitionTimeout && clearTimeout(elementChildProperties.transitionTimeout)
-
         setStyle({
             ...style,
             transition: `${settings.speed}ms ${settings.easing}`
         })
-
-        elementChildProperties.transitionTimeout = setTimeout(() => {
-            setStyle({
-                ...style,
-                transition: ''
-            })
-        }, settings.speed)
     }
 
     const getValues = (e: any) => {
@@ -109,7 +99,7 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
             setStyle({
                 ...style,
                 transform: `
-                    perspective(${settings.perspective}px)
+                    perspective(1000px)
                     rotateX(0deg)
                     rotateY(0deg)
                     scale3d(1, 1, 1)

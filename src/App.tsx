@@ -29,9 +29,11 @@ function App() {
 
       <MouseContainer
           options={{
-            max: 10,
+            max: 20,
             perspective: 1000,
             scale: 1.05,
+            speed: 1000,
+            transition: false
           }}
           styles={styles.mouseContainer}
           chasingElement={
