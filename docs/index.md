@@ -1,3 +1,7 @@
+## Preview
+
+![Gif preview](https://github.com/leoncarey/react-mouse-image-move/blob/main/docs/preview.gif?raw=true)
+
 ## Getting started
 
 ```
@@ -50,7 +54,9 @@ function App() {
           }}
           styles={styles.mouseContainer}
           chasingElement={
-            <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
+            <ChasingElement styles={styles.chasingElement}>
+              <div>Children element</div>
+            </ChasingElement>
           }
       />
     </div>

@@ -37,9 +37,11 @@ function App() {
           }}
           styles={styles.mouseContainer}
           chasingElement={
-            <ChasingElement styles={styles.chasingElement} chasingComponent={<div>lala</div>} />
+            <ChasingElement styles={styles.chasingElement}>
+              <div>Children element</div>
+            </ChasingElement>
           }
-      />
+        />
     </div>
   );
 }
