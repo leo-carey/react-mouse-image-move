@@ -1,10 +1,10 @@
 import React from 'react'
 import IChasingElement from '../../interfaces/IChasingElement'
 
-const ChasingElement: React.FC<IChasingElement> = ({chasingComponent, styles, children}) => {
+const ChasingElement: React.FC<IChasingElement> = ({styles, children}) => {
     return (
         <div style={styles}>
-            {chasingComponent && children}
+            {children}
         </div>
     )
 }

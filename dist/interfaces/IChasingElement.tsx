@@ -1,6 +1,5 @@
-import { ReactElement } from 'react'
-
+import { ReactElement } from "react";
 export default interface IChasingElement {
-    chasingComponent?: ReactElement,
+    children: ReactElement<any, any>,
     styles?: object
 }

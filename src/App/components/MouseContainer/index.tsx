@@ -140,7 +140,7 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
             onMouseLeave={handleMouseLeave}
         >
             <ChasingElement styles={style}>
-                {chasingElement.props.chasingComponent}
+                {chasingElement.props.children}
             </ChasingElement>
         </div>
     )
