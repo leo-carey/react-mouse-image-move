@@ -1,7 +1,7 @@
 {
   "name": "react-mouse-image-move",
   "description": "A React component to move images also when mouse moves.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": false,
   "files": [
     "dist",
@@ -9,7 +9,8 @@
   ],
   "keywords": [
     "html",
-    "js",
+    "ts",
+    "tsx",
     "react"
   ],
   "author": "Leonardo Carey",
