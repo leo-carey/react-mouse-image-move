@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 
-import { MouseContainer, ChasingElement } from './App/components'
+import { MouseContainer, ChasingElement } from './App/'
 
 const styles = {
   mouseContainer: {

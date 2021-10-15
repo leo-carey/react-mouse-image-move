@@ -63,8 +63,6 @@ export default App
 ---
 ## Elements
 
-<br>
-
 #### MouseContainer
 
 | Property       | Description                           | Required  |
