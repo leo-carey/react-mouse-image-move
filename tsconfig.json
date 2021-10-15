@@ -29,6 +29,6 @@
     "dist"
   ],
   "include": [
-    "src"
+    "src/App/"
   ]
 }
