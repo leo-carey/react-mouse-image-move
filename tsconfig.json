@@ -19,6 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "outDir": "./dist",
     "typeRoots": [
       "./typings/*.d.ts"
     ]
