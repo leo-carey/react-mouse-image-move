@@ -1,7 +1,7 @@
 {
   "name": "react-mouse-image-move",
   "description": "A React component to move images also when mouse moves.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "files": [
     "dist",
@@ -29,7 +29,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "clean": "rimraf dist",
-    "compile": "npm run clean && cross-env NODE_ENV=production babel src/App/ --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__"
+    "compile": "npm run clean && tsc && cross-env NODE_ENV=production babel src/App/ --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__"
   },
   "eslintConfig": {
     "extends": [

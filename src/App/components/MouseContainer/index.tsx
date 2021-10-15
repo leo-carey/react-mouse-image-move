@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { ChasingElement } from '..'
+import ChasingElement from '../ChasingElement'
 import IElementChildProperties from '../../interfaces/IElementChildProperties'
 import IMouseContainer from '../../interfaces/IMouseContainer'
 
