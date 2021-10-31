@@ -7,11 +7,7 @@ const styles = {
   mouseContainer: {
     backgroundColor: '#d3eeca',
     width: '100%',
-    height: '70vh',
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    height: '70vh'
   },
   chasingElement: {
     backgroundColor: '#7771c7',
