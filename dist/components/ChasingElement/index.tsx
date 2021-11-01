@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from "react";
 import IChasingElement from '../../interfaces/IChasingElement'
 
 const ChasingElement: React.FC<IChasingElement> = ({styles, ...props}) => {
