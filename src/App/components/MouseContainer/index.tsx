@@ -130,7 +130,7 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
         elementChildProperties.updateCall = requestAnimationFrame(update.bind(wrapperElement, e))
     }
 
-    const handleMouseLeave = (e: any) => {
+    const handleMouseLeave = () => {
         setTransition()
 
         if (settings.reset) {
