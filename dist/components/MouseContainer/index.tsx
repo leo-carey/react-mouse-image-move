@@ -3,7 +3,7 @@ import ChasingElement from '../ChasingElement'
 import IElementChildProperties from '../../interfaces/IElementChildProperties'
 import IMouseContainer from '../../interfaces/IMouseContainer'
 
-const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, options}) => {
+const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, options, ...props}) => {
     const wrapperElement = useRef(null)
 
     const initElementChildProperties: IElementChildProperties = {
@@ -13,6 +13,13 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
         top: 0,
         transitionTimeout: null,
         updateCall: 0
+    }
+
+    const defaultStyles = {
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 
     const [style, setStyle] = useState(chasingElement.props.styles)
@@ -134,10 +141,14 @@ const MouseContainer: React.FC<IMouseContainer> = ({chasingElement, styles, opti
     return (
         <div
             ref={wrapperElement}
-            style={styles}
+            style={{
+                ...defaultStyles,
+                ...styles
+            }}
             onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            {...props}
         >
             <ChasingElement styles={style}>
                 {chasingElement}

@@ -3,7 +3,7 @@ import IChasingElement from '../../interfaces/IChasingElement'
 
 const ChasingElement: React.FC<IChasingElement> = ({styles, ...props}) => {
     return (
-        <div style={styles}>
+        <div style={styles} {...props}>
             {props.children}
         </div>
     )
