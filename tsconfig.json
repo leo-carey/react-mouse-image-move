@@ -41,5 +41,8 @@
   ],
   "include": [
     "src/App/"
-  ]
+  ],
+  "resolve": {
+    "extensions": [".ts", ".tsx", ".js", ".jsx"]
+  }
 }
