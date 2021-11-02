@@ -148,7 +148,6 @@ var MouseContainer = function MouseContainer(_ref) {
 
   var update = function update(e) {
     var values = getValues(e);
-    console.log('EFFECTS ====> ', EffectsControl[settings.effectType](settings, values));
     setStyle(_extends({}, style, {
       transform: EffectsControl[settings.effectType](settings, values)
     }));
