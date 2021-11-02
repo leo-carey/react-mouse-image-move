@@ -24,14 +24,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           target-branch: "main"
-  # - uses: fregante/setup-git-user@v1
-  # - run: git config user.name "GitHub Actions Publish"
-  # - run: git config user.email "actions@users.noreply.github.com"
-  # - run:
-  #     npm version patch &&
-  #     git add package.json package-lock.json &&
-  #     git commit -m "Update Version" &&
-  #     git push -u origin main
 
   publish-npm:
     name: Publishing to npm
@@ -45,7 +37,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
