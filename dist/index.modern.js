@@ -1,35 +1,68 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-const ChasingElement = ({
-  styles,
-  ...props
-}) => {
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+var _excluded = ["styles"];
+
+var ChasingElement = function ChasingElement(_ref) {
+  var styles = _ref.styles,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded);
+
   return React.createElement("div", Object.assign({
     style: styles
   }, props), props.children);
 };
 
-const EffectsControl = {
-  perspective: (settings, values) => `
-        perspective(${settings.perspective}px)
-        rotateX(${settings.axis === 'x' ? 0 : values.tiltY}deg)
-        rotateY(${settings.axis === 'y' ? 0 : values.tiltX}deg)
-        scale3d(${settings.scale}, ${settings.scale}, ${settings.scale})
-        `,
-  movement: (settings, values) => `
-        translateX(${settings.axis === 'x' ? 0 : parseFloat(values.tiltY) * 2.5}px)
-        translateY(${settings.axis === 'y' ? 0 : parseFloat(values.tiltX) * 2.5}px)
-        `
+var EffectsControl = {
+  perspective: function perspective(settings, values) {
+    return "\n        perspective(" + settings.perspective + "px)\n        rotateX(" + (settings.axis === 'x' ? 0 : values.tiltY) + "deg)\n        rotateY(" + (settings.axis === 'y' ? 0 : values.tiltX) + "deg)\n        scale3d(" + settings.scale + ", " + settings.scale + ", " + settings.scale + ")\n        ";
+  },
+  movement: function movement(settings, values) {
+    return "\n        translateX(" + (settings.axis === 'x' ? 0 : parseFloat(values.tiltY) * 2.5) + "px)\n        translateY(" + (settings.axis === 'y' ? 0 : parseFloat(values.tiltX) * 2.5) + "px)\n        ";
+  }
 };
 
-const MouseContainer = ({
-  chasingElement,
-  styles,
-  options,
-  ...props
-}) => {
-  const wrapperElement = useRef(null);
-  const initElementChildProperties = {
+var _excluded$1 = ["chasingElement", "styles", "options"];
+
+var MouseContainer = function MouseContainer(_ref) {
+  var chasingElement = _ref.chasingElement,
+      styles = _ref.styles,
+      options = _ref.options,
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+
+  var wrapperElement = useRef(null);
+  var initElementChildProperties = {
     width: 0,
     height: 0,
     left: 0,
@@ -37,15 +70,22 @@ const MouseContainer = ({
     transitionTimeout: null,
     updateCall: 0
   };
-  const defaultStyles = {
+  var defaultStyles = {
     flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   };
-  const [style, setStyle] = useState(chasingElement.props.styles);
-  const [elementChildProperties, setElementChildProperties] = useState(initElementChildProperties);
-  const defaultSettings = {
+
+  var _useState = useState(chasingElement.props.styles),
+      style = _useState[0],
+      setStyle = _useState[1];
+
+  var _useState2 = useState(initElementChildProperties),
+      elementChildProperties = _useState2[0],
+      setElementChildProperties = _useState2[1];
+
+  var defaultSettings = {
     max: 30,
     effectType: 'perspective',
     perspective: 1000,
@@ -55,82 +95,77 @@ const MouseContainer = ({
     axis: null,
     reset: true
   };
-  const settings = { ...defaultSettings,
-    ...options
-  };
-  useEffect(() => {}, []);
-  useEffect(() => {
-    return () => {
+
+  var settings = _extends({}, defaultSettings, options);
+
+  useEffect(function () {}, []);
+  useEffect(function () {
+    return function () {
       elementChildProperties.transitionTimeout && clearTimeout(elementChildProperties.transitionTimeout);
       cancelAnimationFrame(elementChildProperties.updateCall);
     };
   }, [elementChildProperties]);
 
-  const updateChildPosition = element => {
-    const rect = element.currentTarget.getBoundingClientRect();
-    setElementChildProperties({ ...elementChildProperties,
+  var updateChildPosition = function updateChildPosition(element) {
+    var rect = element.currentTarget.getBoundingClientRect();
+    setElementChildProperties(_extends({}, elementChildProperties, {
       width: element.currentTarget.offsetWidth,
       height: element.currentTarget.offsetHeight,
       left: rect.left,
       top: rect.top
-    });
+    }));
   };
 
-  const setTransition = () => {
-    setStyle({ ...style,
-      transition: `${settings.speed}ms ${settings.easing}`
-    });
+  var setTransition = function setTransition() {
+    setStyle(_extends({}, style, {
+      transition: settings.speed + "ms " + settings.easing
+    }));
   };
 
-  const getValues = e => {
-    const x = (e.nativeEvent.clientX - elementChildProperties.left) / elementChildProperties.width;
-    const y = (e.nativeEvent.clientY - elementChildProperties.top) / elementChildProperties.height;
+  var getValues = function getValues(e) {
+    var x = (e.nativeEvent.clientX - elementChildProperties.left) / elementChildProperties.width;
+    var y = (e.nativeEvent.clientY - elementChildProperties.top) / elementChildProperties.height;
 
-    const _x = Math.min(Math.max(x, 0), 1);
+    var _x = Math.min(Math.max(x, 0), 1);
 
-    const _y = Math.min(Math.max(y, 0), 1);
+    var _y = Math.min(Math.max(y, 0), 1);
 
-    const tiltX = (settings.max / 2 - _x * settings.max).toFixed(2);
+    var tiltX = (settings.max / 2 - _x * settings.max).toFixed(2);
 
-    const tiltY = (_y * settings.max - settings.max / 2).toFixed(2);
-    const percentageX = _x * 100;
-    const percentageY = _y * 100;
+    var tiltY = (_y * settings.max - settings.max / 2).toFixed(2);
+    var percentageX = _x * 100;
+    var percentageY = _y * 100;
     return {
-      tiltX,
-      tiltY,
-      percentageX,
-      percentageY
+      tiltX: tiltX,
+      tiltY: tiltY,
+      percentageX: percentageX,
+      percentageY: percentageY
     };
   };
 
-  const update = e => {
-    const values = getValues(e);
+  var update = function update(e) {
+    var values = getValues(e);
     console.log('EFFECTS ====> ', EffectsControl[settings.effectType](settings, values));
-    setStyle({ ...style,
+    setStyle(_extends({}, style, {
       transform: EffectsControl[settings.effectType](settings, values)
-    });
+    }));
     elementChildProperties.updateCall = null;
   };
 
-  const reset = () => {
-    window.requestAnimationFrame(() => {
-      setStyle({ ...style,
-        transform: `
-                    perspective(1000px)
-                    rotateX(0deg)
-                    rotateY(0deg)
-                    scale3d(1, 1, 1)
-                `
-      });
+  var reset = function reset() {
+    window.requestAnimationFrame(function () {
+      setStyle(_extends({}, style, {
+        transform: "\n                    perspective(1000px)\n                    rotateX(0deg)\n                    rotateY(0deg)\n                    scale3d(1, 1, 1)\n                "
+      }));
     });
   };
 
-  const handleMouseEnter = e => {
+  var handleMouseEnter = function handleMouseEnter(e) {
     updateChildPosition(e);
     setTransition();
   };
 
-  const handleMouseMove = e => {
+  var handleMouseMove = function handleMouseMove(e) {
     e.persist();
 
     if (elementChildProperties.updateCall !== null) {
@@ -140,7 +175,7 @@ const MouseContainer = ({
     elementChildProperties.updateCall = requestAnimationFrame(update.bind(wrapperElement, e));
   };
 
-  const handleMouseLeave = () => {
+  var handleMouseLeave = function handleMouseLeave() {
     setTransition();
 
     if (settings.reset) {
@@ -150,9 +185,7 @@ const MouseContainer = ({
 
   return React.createElement("div", Object.assign({
     ref: wrapperElement,
-    style: { ...defaultStyles,
-      ...styles
-    },
+    style: _extends({}, defaultStyles, styles),
     onMouseEnter: handleMouseEnter,
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave
