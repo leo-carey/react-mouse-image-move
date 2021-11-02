@@ -32,6 +32,8 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm version patch
+      - run: git config --global user.email "careycoder@gmail.com"
+      - run: git config --global user.name "Automation"
       - run: git add .;
       - run: git commit -m "Update Version"
       - run: git push
