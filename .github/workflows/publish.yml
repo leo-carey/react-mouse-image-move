@@ -31,9 +31,13 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - uses: oleksiyrudenko/gha-git-credentials@v2.1
+        with:
+          global: true
+          name: 'Automation Leo Carey'
+          email: 'careycoder@gmail.com'
+          actor: 'leoncarey'
       - run: npm version patch
-      - run: git config --global user.email "careycoder@gmail.com"
-      - run: git config --global user.name "Automation"
       - run: git add .;
       - run: git commit -m "Update Version"
       - run: git push
