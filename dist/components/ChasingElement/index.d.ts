@@ -1,4 +1,4 @@
-import React from "react";
-import IChasingElement from "../../interfaces/IChasingElement";
-declare const ChasingElement: React.FC<IChasingElement>;
+import React from 'react';
+import ChasingElementInterface from '../../interfaces/ChasingElementInterface';
+declare const ChasingElement: React.FC<ChasingElementInterface>;
 export default ChasingElement;

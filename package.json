@@ -24,12 +24,12 @@
   "source": "src/index.tsx",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
-  "typings": "src/typings.d.ts",
+  "typings": "dist/index.d.ts",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "build": "npm run clean && microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
@@ -38,9 +38,9 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "clean": "rimraf dist",
+    "link-example": "rm -Rf node_modules/ example/node_modules && npm i && cd example/ && npm i",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build",
-    "compile": "npm run clean && tsc && cross-env NODE_ENV=production babel src/App/ --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__"
+    "deploy": "gh-pages -d example/build"
   },
   "eslintConfig": {
     "extends": [
@@ -75,6 +75,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
