@@ -52,7 +52,7 @@ var EffectsControl = {
     return "\n        perspective(" + settings.perspective + "px)\n        rotateX(" + (settings.axis === 'x' ? 0 : values.tiltY) + "deg)\n        rotateY(" + (settings.axis === 'y' ? 0 : values.tiltX) + "deg)\n        scale3d(" + settings.scale + ", " + settings.scale + ", " + settings.scale + ")\n        ";
   },
   movement: function movement(settings, values) {
-    return "\n        translateX(" + (settings.axis === 'x' ? 0 : parseFloat(values.tiltY) * 2.5) + "px)\n        translateY(" + (settings.axis === 'y' ? 0 : parseFloat(values.tiltX) * 2.5) + "px)\n        ";
+    return "\n        translateX(" + (settings.axis === 'x' ? 0 : parseFloat(values.tiltY) * 2.8) + "px)\n        translateY(" + (settings.axis === 'y' ? 0 : parseFloat(values.tiltX) * 2.8) + "px)\n        ";
   }
 };
 

@@ -26,8 +26,8 @@ export const EffectsControl = {
         tiltX: string;
     }): string => (
         `
-        translateX(${settings.axis === 'x' ? 0 : (parseFloat(values.tiltY) * 2.5)}px)
-        translateY(${settings.axis === 'y' ? 0 : (parseFloat(values.tiltX) * 2.5)}px)
+        translateX(${settings.axis === 'x' ? 0 : (parseFloat(values.tiltY) * 2.8)}px)
+        translateY(${settings.axis === 'y' ? 0 : (parseFloat(values.tiltX) * 2.8)}px)
         `
   )
 }

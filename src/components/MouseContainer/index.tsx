@@ -42,6 +42,7 @@ const MouseContainer: React.FC<MouseContainerInterface> = ({ chasingElement, sty
     ...options
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   useEffect(() => {}, [])
 
   useEffect(() => {
