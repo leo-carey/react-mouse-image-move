@@ -1,4 +1,4 @@
-## Preview
+## React Mouse Image Move
 
 ![Gif preview](https://github.com/leoncarey/react-mouse-image-move/blob/main/docs/preview.gif?raw=true)
 
