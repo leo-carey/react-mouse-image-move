@@ -1,6 +1,6 @@
 name: Publish
 
-on: 
+on:
   push:
     branches:
       - main
@@ -31,12 +31,9 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - uses: oleksiyrudenko/gha-git-credentials@v2.1
-        with:
-          global: true
-          name: 'Automation Leo Carey'
-          email: 'careycoder@gmail.com'
-          actor: 'leoncarey'
+      - uses: fregante/setup-git-user@v1
+      - run: git config user.name "GitHub Actions Publish"
+      - run: git config user.email "actions@users.noreply.github.com"
       - run: npm version patch
       - run: git add .;
       - run: git commit -m "Update Version"
