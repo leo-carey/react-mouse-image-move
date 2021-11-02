@@ -92,8 +92,6 @@ const MouseContainer: React.FC<MouseContainerInterface> = ({ chasingElement, sty
   const update = (e: any) => {
     const values = getValues(e)
 
-    console.log('EFFECTS ====> ', EffectsControl[settings.effectType](settings, values))
-
     setStyle({
       ...style,
       transform: EffectsControl[settings.effectType](settings, values)
