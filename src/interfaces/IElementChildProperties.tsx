@@ -1,5 +1,5 @@
 
-export default interface IElementChildProperties {
+export default interface ElementChildPropertiesInterface {
     width: number,
     height: number,
     left: number,

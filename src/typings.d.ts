@@ -1,15 +1,10 @@
-declare global {
-  namespace JSX {
-    export interface IntrinsicElements {
-      item: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>>;
-    }
-  }
-
-  export interface IChasingElement {
+import '../dist'
+declare module 'react-mouse-image-move' {
+  export interface ChasingElementInterface {
     styles?: object;
   }
 
-  export interface IElementChildProperties {
+  export interface ElementChildPropertiesInterface {
     width: number;
     height: number;
     left: number;
@@ -18,8 +13,8 @@ declare global {
     updateCall: any;
   }
 
-  export interface IMouseContainer {
-    chasingElement: ReactElement<IChasingElement>;
+  export interface MouseContainerInterface {
+    chasingElement: ReactElement<ChasingElementInterface>;
     styles?: object;
     options?: object;
     ref?: string;

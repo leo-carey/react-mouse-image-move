@@ -1,25 +1,25 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import './App.css'
 
-import { MouseContainer, ChasingElement } from "../../src";
+import { MouseContainer, ChasingElement } from '../../dist'
 
 const styles = {
   mouseContainer: {
-    backgroundColor: "#d3eeca",
-    width: "100%",
-    height: "70vh",
+    backgroundColor: '#d3eeca',
+    width: '100%',
+    height: '70vh'
   },
   chasingElement: {
-    backgroundColor: "#7771c7",
+    backgroundColor: '#7771c7',
     width: 400,
-    height: 300,
-  },
-};
+    height: 300
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">React Mouse Image Move</header>
+    <div className='App'>
+      <header className='App-header'>React Mouse Image Move</header>
 
       <MouseContainer
         options={{
@@ -27,7 +27,7 @@ function App() {
           perspective: 1000,
           scale: 1.05,
           speed: 1000,
-          transition: false,
+          transition: false
         }}
         styles={styles.mouseContainer}
         chasingElement={
@@ -37,7 +37,7 @@ function App() {
         }
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

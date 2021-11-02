@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
-import IChasingElement from './IChasingElement'
+import ChasingElementInterface from './ChasingElementInterface'
 
-export default interface IMouseContainer {
-    chasingElement: ReactElement<IChasingElement>,
+export default interface MouseContainerInterface {
+    chasingElement: ReactElement<ChasingElementInterface>,
     styles?: object,
     options?: object,
     ref?: string

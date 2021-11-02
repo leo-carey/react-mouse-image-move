@@ -1,3 +1,3 @@
-export default interface IChasingElement {
+export default interface ChasingElementInterface {
     styles?: object;
 }

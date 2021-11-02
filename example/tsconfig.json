@@ -28,10 +28,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "outDir": "./dist",
-    "typeRoots": [
-      "./typings/*.d.ts"
-    ]
+    "outDir": "./dist"
   },
   "exclude": [
     "node_modules",

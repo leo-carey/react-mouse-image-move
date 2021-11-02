@@ -1,12 +1,12 @@
-import React from "react";
-import IChasingElement from "../../interfaces/IChasingElement";
+import React from 'react'
+import ChasingElementInterface from '../../interfaces/ChasingElementInterface'
 
-const ChasingElement: React.FC<IChasingElement> = ({ styles, ...props }) => {
+const ChasingElement: React.FC<ChasingElementInterface> = ({ styles, ...props }) => {
   return (
     <div style={styles} {...props}>
       {props.children}
     </div>
-  );
-};
+  )
+}
 
-export default ChasingElement;
+export default ChasingElement
