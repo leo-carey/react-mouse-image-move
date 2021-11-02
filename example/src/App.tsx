@@ -1,7 +1,7 @@
 import React from 'react'
-import './App.css'
 
-import { MouseContainer, ChasingElement } from '../../dist'
+import { MouseContainer, ChasingElement } from 'react-mouse-image-move'
+import './App.css'
 
 const styles = {
   mouseContainer: {
