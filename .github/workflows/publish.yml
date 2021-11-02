@@ -37,6 +37,7 @@ jobs:
       - run: git checkout main && git fetch && git pull --rebase
       - run: npm version patch
       - run: git add package.json package-lock.json
+      - run: git status
       - run: git commit -m "Update Version"
       - run: git push -u origin main
       - run: npm ci
