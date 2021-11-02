@@ -48,6 +48,7 @@ function App() {
     <div>
       <MouseContainer
           options={{
+            effectType: 'perspective', // or 'movement'
             max: 10,
             perspective: 1000,
             scale: 1.05,
@@ -69,6 +70,8 @@ export default App
 ---
 ## Elements
 
+<br>
+
 #### MouseContainer
 
 | Property       | Description                           | Required  |
@@ -81,8 +84,9 @@ export default App
 ```tsx
 // Options
 {
+    effectType: 'perspective'|'movement' // Type of effect to your element
     max: 10, // Element child rotation
-    perspective: 1000, // Rotation depth
+    perspective: 1000, // Rotation depth if is set in perspective effect type
     easing: 'cubic-bezier(.03,.98,.52,.99)', // Transition between values
     scale: 1.05, // How much does the size increase
     speed: 1000, // Speed for transition element

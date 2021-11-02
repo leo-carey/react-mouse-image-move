@@ -47,6 +47,15 @@ var ChasingElement = function ChasingElement(_ref) {
   }, props), props.children);
 };
 
+var EffectsControl = {
+  perspective: function perspective(settings, values) {
+    return "\n        perspective(" + settings.perspective + "px)\n        rotateX(" + (settings.axis === 'x' ? 0 : values.tiltY) + "deg)\n        rotateY(" + (settings.axis === 'y' ? 0 : values.tiltX) + "deg)\n        scale3d(" + settings.scale + ", " + settings.scale + ", " + settings.scale + ")\n        ";
+  },
+  movement: function movement(settings, values) {
+    return "\n        translateX(" + (settings.axis === 'x' ? 0 : parseFloat(values.tiltY) * 2.5) + "px)\n        translateY(" + (settings.axis === 'y' ? 0 : parseFloat(values.tiltX) * 2.5) + "px)\n        ";
+  }
+};
+
 var _excluded$1 = ["chasingElement", "styles", "options"];
 
 var MouseContainer = function MouseContainer(_ref) {
@@ -81,6 +90,7 @@ var MouseContainer = function MouseContainer(_ref) {
 
   var defaultSettings = {
     max: 30,
+    effectType: 'perspective',
     perspective: 1000,
     easing: 'cubic-bezier(.03,.98,.52,.99)',
     scale: 1.1,
@@ -138,8 +148,9 @@ var MouseContainer = function MouseContainer(_ref) {
 
   var update = function update(e) {
     var values = getValues(e);
+    console.log('EFFECTS ====> ', EffectsControl[settings.effectType](settings, values));
     setStyle(_extends({}, style, {
-      transform: "\n                perspective(" + settings.perspective + "px)\n                rotateX(" + (settings.axis === 'x' ? 0 : values.tiltY) + "deg)\n                rotateY(" + (settings.axis === 'y' ? 0 : values.tiltX) + "deg)\n                scale3d(" + settings.scale + ", " + settings.scale + ", " + settings.scale + ")"
+      transform: EffectsControl[settings.effectType](settings, values)
     }));
     elementChildProperties.updateCall = null;
   };

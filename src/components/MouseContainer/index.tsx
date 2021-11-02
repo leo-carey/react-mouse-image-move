@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import ChasingElement from '../ChasingElement'
 import ElementChildPropertiesInterface from '../../interfaces/ElementChildPropertiesInterface'
 import MouseContainerInterface from '../../interfaces/MouseContainerInterface'
+import { EffectsControl } from '../../helpers/effects-control'
 
 const MouseContainer: React.FC<MouseContainerInterface> = ({ chasingElement, styles, options, ...props }) => {
   const wrapperElement = useRef(null)
@@ -27,6 +28,7 @@ const MouseContainer: React.FC<MouseContainerInterface> = ({ chasingElement, sty
 
   const defaultSettings = {
     max: 30,
+    effectType: 'perspective',
     perspective: 1000,
     easing: 'cubic-bezier(.03,.98,.52,.99)',
     scale: 1.1,
@@ -89,13 +91,11 @@ const MouseContainer: React.FC<MouseContainerInterface> = ({ chasingElement, sty
   const update = (e: any) => {
     const values = getValues(e)
 
+    console.log('EFFECTS ====> ', EffectsControl[settings.effectType](settings, values))
+
     setStyle({
       ...style,
-      transform: `
-                perspective(${settings.perspective}px)
-                rotateX(${settings.axis === 'x' ? 0 : values.tiltY}deg)
-                rotateY(${settings.axis === 'y' ? 0 : values.tiltX}deg)
-                scale3d(${settings.scale}, ${settings.scale}, ${settings.scale})`
+      transform: EffectsControl[settings.effectType](settings, values)
     })
 
     elementChildProperties.updateCall = null
